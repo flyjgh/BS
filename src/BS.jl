@@ -6,7 +6,7 @@ module BS
     export usr, dev
     export @mk, @ls
 
-    import Base: (-), (^), (/), (%)
+    import Base: (+), (-), (^), (/), (%)
 
     #-------------------------------------------------------------------
 
@@ -54,7 +54,6 @@ module BS
     #-------------------------------------------------------------------
     # Function abstaction
 
-    (-)(ƒ::Function)         = (x = /(ƒ); pop!(x); ∘(x...))
     (-)(ƒ::Function, n::Int) = (x = /(ƒ); popat!(x, n); ∘(x...))
     (^)(ƒ::Function, n::Int) = ∘(repeat([ƒ], n)...)
     (/)(ƒ::Function)         = Function[ƒ]
@@ -65,14 +64,9 @@ module BS
     Base.lastindex(ƒ::Function)   = ⇔(/(ƒ))
     Base.firstindex(ƒ::Function)  = 1
 
-    function Base.getindex(ƒ::Function, p::Pair{Int,<:Function})
+    function Base.setindex(ƒ::Function, i, f::Function)
         ω = /(ƒ)
-        ω[p.first] = p.second
-        ∘(ω...)
-    end
-    function Base.getindex(ƒ::Function, p::Pair{<:AbstractRange,<:Any})
-        ω = /(ƒ)
-        ω[p.first] .= p.second
+        ω[i] = f
         ∘(ω...)
     end
 
@@ -85,6 +79,7 @@ module BS
         end
         v
     end
+
     # ----------------------------------------------------------------
     # currying
 
