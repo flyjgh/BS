@@ -121,7 +121,7 @@ module BS
             function $f(args...)
                 if length(args) < $arity
                     x -> $f((args..., x)...)
-                else length(args) == 3
+                elseif length(args) == 3
                     $f(BS.Curried(), args...)
                 else
                     throw("shit, Damn")
