@@ -1,6 +1,6 @@
 module BS
 
-    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀, Curried
+    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀, ⤏
     export ls, lspath, bin, num, permutations, divisibles
     export +, -, *, /, %, push!, pop!, queue!, dequeue!
     export usr, dev
@@ -98,6 +98,20 @@ module BS
     """
     (⇀)(x, ƒ) = (y...) -> ƒ(x, y...)
     
+    """
+        (⤏)(ƒ, x...) = (args...) -> ƒ(x..., args...)
+        
+    ```
+    julia> g(x,y,z) = 6x^2 + 4y + z
+    julia> ⤏(g,2)(3,4)
+    40
+    julia> ⤏(g,2,3)(4)
+    40
+    julia> ⤏(g,2,3,4)()
+    40
+    """
+    (⤏)(ƒ, x...) = (y...) -> ƒ(x..., y...)
+    (⤏)(ƒ, x::Union{AbstractArray,AbstractRange,Tuple}) = (args...) -> ƒ(x, args...)
 
     struct Curried end
     """
