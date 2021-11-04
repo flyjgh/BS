@@ -2,11 +2,11 @@ module BS
 
     export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀, Curried
     export ls, lspath, bin, num, permutations, divisibles
-    export +, -, ^, /, %, push!, pop!, queue!, dequeue!
+    export +, -, *, /, %, push!, pop!, queue!, dequeue!
     export usr, dev
     export @mk, @ls
 
-    import Base: (+), (-), (^), (/), (%)
+    import Base: (+), (-), (*), (/), (%)
 
     #-------------------------------------------------------------------
 
@@ -55,7 +55,7 @@ module BS
     # Function abstaction
 
     (-)(ƒ::Function, n::Int) = (x = /(ƒ); popat!(x, n); ∘(x...))
-    (^)(ƒ::Function, n::Int) = ∘(repeat([ƒ], n)...)
+    (*)(ƒ::Function, n::Int) = ∘(repeat([ƒ], n)...)
     (/)(ƒ::Function)         = Function[ƒ]
     (/)(ƒ::ComposedFunction) = splat(ƒ) |> reverse
     (%)(ƒ::Function)         = ƒ.outer
