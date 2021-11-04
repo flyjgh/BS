@@ -1,6 +1,6 @@
 module BS
 
-    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀
+    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀, Curried
     export ls, lspath, bin, num, permutations, divisibles
     export +, -, ^, /, %, push!, pop!, queue!, dequeue!
     export usr, dev
@@ -101,6 +101,8 @@ module BS
 
     struct Curried end
     """
+    only works for functions with more than 2 args.
+
     ```
     julia> @⇀ ƒ(a,b,c) = a + b + c
     julia> ƒ(2)(3)(5)
@@ -121,12 +123,12 @@ module BS
                 if length(args) < $arity
                     x -> $f((args..., x)...)
                 elseif length(args) == 3
-                    $f(Curried(), args...)
+                    $f(BS.Curried(), args...)
                 else
                     throw($err_str)
                 end
             end
-            $f(::Curried, $(fargs...)) = $body
+            $f(::BS.Curried, $(fargs...)) = $body
             end
         end |> esc
     end
