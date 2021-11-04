@@ -116,16 +116,15 @@ module BS
         fargs = fdef.args[1].args[2:end]
         arity = length(fargs)
         body = fdef.args[2]
-        err_str = "Too many arguments. Function $f only takes $arity arguments"
         quote 
             begin 
             function $f(args...)
                 if length(args) < $arity
                     x -> $f((args..., x)...)
-                elseif length(args) == 3
+                else length(args) == 3
                     $f(BS.Curried(), args...)
                 else
-                    throw($err_str)
+                    throw("shit, Damn")
                 end
             end
             $f(::BS.Curried, $(fargs...)) = $body
