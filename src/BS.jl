@@ -1,6 +1,6 @@
 module BS
 
-    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀, ⤏
+    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀
     export ls, lspath, bin, num, permutations, divisibles
     export +, -, *, /, %, push!, pop!, queue!, dequeue!
     export usr, dev
@@ -82,21 +82,6 @@ module BS
 
     # ----------------------------------------------------------------
     # currying
-
-    """
-        (⇀)(x, ƒ) = (args...) -> ƒ(x, args...)
-        
-    ```
-    julia> ƒ(a,b,c) = a + b + c
-    julia> (2 ⇀ ƒ)(3, 5)
-    10
-    julia> (2 ⇀ 3 ⇀ ƒ)(5)
-    10
-    julia> (2 ⇀ 3 ⇀ 5 ⇀ ƒ)()
-    10
-    ```
-    """
-    (⇀)(x, ƒ) = (y...) -> ƒ(x, y...)
     
     """
         (⤏)(ƒ, x...) = (args...) -> ƒ(x..., args...)
@@ -110,8 +95,8 @@ module BS
     julia> ⤏(g,2,3,4)()
     40
     """
-    (⤏)(ƒ, x...) = (y...) -> ƒ(x..., y...)
-    (⤏)(ƒ, x::Union{AbstractArray,AbstractRange,Tuple}) = (args...) -> ƒ(x, args...)
+    (⇀)(ƒ, x...) = (y...) -> ƒ(x..., y...)
+    (⇀)(ƒ, x::Union{AbstractArray,AbstractRange,Tuple}) = (args...) -> ƒ(x, args...)
 
     struct Curried end
     """
