@@ -1,9 +1,9 @@
 module BS
 
-    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶
-    export id, ls, lspath, bin, num, permutations, divisibles
-    export -, ^, /, %, push!, pop!, queue!, dequeue!
-    export dev, app
+    export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀
+    export ls, lspath, bin, num, permutations, divisibles
+    export +, -, ^, /, %, push!, pop!, queue!, dequeue!
+    export usr, dev
     export @mk, @ls
 
     import Base: (-), (^), (/), (%)
@@ -24,7 +24,6 @@ module BS
 
     #-------------------------------------------------------------------
 
-    id(x) = x
     const ls = readdir
     const lspath = readdir(join=true)
 
@@ -82,7 +81,7 @@ module BS
         v = Vector{Function}()
         while ƒ isa ComposedFunction
              splat(ƒ.inner) .|> ⊷(push!,v); ƒ = ƒ.outer
-            ƒ isa ComposedFunction||push!(v, ƒ)
+            ƒ isa ComposedFunction || push!(v, ƒ)
         end
         v
     end
@@ -140,11 +139,13 @@ module BS
     #-------------------------------------------------------------------
     # Type abstaction
 
-    (+)(t::Type)           = supertype(t)
+    (+)(t::Type) = supertype(t)
+    
+    #-------------------------------------------------------------------
+    # Static Size Arrays
+
     (-)(T::Type)           = Vector{T}()
-    (-)(T::Type, n::Int)     = Vector{T}(undef, n)
-    (-)(n::Int, T::Type)     = Vector{T}(undef, n)
-    (-)(v::Tuple, T::Type) = Array{T}(undef,v...)
+    (-)(T::Type, n::Int)   = Vector{T}(undef, n)
     (-)(T::Type, v::Tuple) = Array{T}(undef,v...)
 
     #-------------------------------------------------------------------
