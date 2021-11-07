@@ -3,7 +3,7 @@ module BS
     export ⇒, Ξ, ♯, ⊗, ⊷, ⊶, ⇀, @⇀
     export ls, lspath, bin, num, permutations, divisibles
     export +, -, *, /, %, push!, pop!, queue!, dequeue!
-    export usr, dev
+    export path_usr, dev
     export @mk, @ls
 
     import Base: (+), (-), (*), (/), (%)
@@ -19,8 +19,8 @@ module BS
 
     #-------------------------------------------------------------------
 
-    const usr = ENV["USERNAME"]
-    const dev = "C:/Users/$usr/.julia/dev/"
+    const path_usr = ENV["USERNAME"]
+    const dev      = "C:/Users/$path_usr/.julia/dev/"
 
     #-------------------------------------------------------------------
 
