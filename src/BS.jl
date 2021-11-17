@@ -20,7 +20,7 @@ module BS
     #-------------------------------------------------------------------
 
     const path_usr = ENV["USERNAME"]
-    const dev      = "C:/Users/$path_usr/.julia/dev/"
+    const path_dev = "C:/Users/$path_usr/.julia/dev/"
 
     #-------------------------------------------------------------------
 
