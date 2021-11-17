@@ -4,7 +4,7 @@ module BS
     export ls, lspath, bin, num, permutations, divisibles
     export +, -, *, /, %, push!, pop!, queue!, dequeue!
     export path_usr, dev
-    export @mk, @ls, @e
+    export @mk, @ls
 
     import Base: (+), (-), (*), (/), (%)
 
