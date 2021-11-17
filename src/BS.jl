@@ -4,7 +4,7 @@ module BS
     export ls, lspath, bin, num, permutations, divisibles
     export +, -, *, /, %, push!, pop!, queue!, dequeue!
     export path_usr, dev
-    export @mk, @ls
+    export @mk, @ls, @e
 
     import Base: (+), (-), (*), (/), (%)
 
@@ -60,9 +60,10 @@ module BS
     (/)(ƒ::ComposedFunction) = splat(ƒ) |> reverse
     (%)(ƒ::Function)         = ƒ.outer
 
-    Base.getindex(ƒ::Function, n) = /(ƒ)[n]
-    Base.lastindex(ƒ::Function)   = ⇔(/(ƒ))
-    Base.firstindex(ƒ::Function)  = 1
+    Base.getindex(ƒ::Function, n)                = /(ƒ)[n]
+    Base.getindex(ƒ::Function, r::AbstractRange) = ∘(/(ƒ)[r]...)
+    Base.lastindex(ƒ::Function)                  = ⇔(/(ƒ))
+    Base.firstindex(ƒ::Function)                 = 1
 
     function Base.setindex(ƒ::Function, i, f::Function)
         ω = /(ƒ)
